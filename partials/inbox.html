@@ -1,3 +1,7 @@
-INBOX
-{{emails}}
-{{test}}
+<div ng-repeat = 'email in emails'>
+  <i class='fa fa-square-o'></i>
+  <!-- <i class='fa fa-check-square'></i> -->
+  <i class='fa fa-star-o'></i>
+  <!-- <i class='fa fa-star'></i> -->
+  <div class='subject' ng-model='subject'>{{email.subject}}</div>
+</div>
