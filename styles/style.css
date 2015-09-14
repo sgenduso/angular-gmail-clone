@@ -5,3 +5,15 @@ html{
 .subject{
   display: inline-block;
 }
+
+.button-bar{
+  margin-bottom: 15px;
+}
+
+.each-email{
+  height: 35px;
+}
+
+.select-dropdown{
+  height: 34px;
+}

@@ -1,4 +1,21 @@
-<div ng-repeat = 'email in emails'>
+<div class='button-bar'>
+  <a class='btn btn-default btn-checkbox'>
+    <i class='fa fa-square-o'></i>
+  </a>
+  <a class='btn btn-default' disabled>Mark as Read</a>
+  <a class='btn btn-default' disabled>Mark as Unread</a>
+  <select class='btn btn-default select-dropdown'>
+    <option selected disabled value='Apply Label'>Apply Label</option>
+    <option value='Create New'>Create New</option>
+  </select>
+  <select class='btn btn-default select-dropdown'>
+    <option selected disabled value='Remove Label'>Remove Label</option>
+  </select>
+  <a class='btn btn-default btn-checkbox' disabled>
+    <i class='fa fa-trash-o'></i>
+  </a>
+</div>
+<div class='each-email' ng-repeat = 'email in emails'>
   <i class='fa fa-square-o'></i>
   <!-- <i class='fa fa-check-square'></i> -->
   <i class='fa fa-star-o'></i>
