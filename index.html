@@ -4,9 +4,15 @@
     <meta charset="utf-8">
     <title>nGmail</title>
     <link rel='stylesheet' href='./styles/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' />
+    <base href='/'>
   </head>
   <body>
+    <script src='/bower_components/jquery/dist/jquery.min.js' type='text/javascript'></script>
     <script src='/bower_components/angular/angular.min.js' type='text/javascript'></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js'></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src='/bower_components/angular-bootstrap/ui-bootstrap.min.js' type='text/javascript'></script>
     <!-- <script src='/bower_components/bootstrap-sass-official/javascripts/bootstrap/bootstrap.min.js' type='text/javascript'></script> -->
     <script src='js/app.js' type='text/javascript'></script>
@@ -14,7 +20,7 @@
     <script src='js/directives.js' type='text/javascript'></script>
     <script src='js/filters.js' type='text/javascript'></script>
     <script src='js/services.js' type='text/javascript'></script>
-    <ng-view></ng-view>
+    <div ng-view></div>
     HI HI HI
   </body>
 </html>
