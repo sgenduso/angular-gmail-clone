@@ -11,7 +11,38 @@ html{
 }
 
 .each-email{
-  height: 35px;
+  height: 40px;
+  border-bottom: solid 1px #EFEFEF;
+  position: relative;
+  /*display: flex;*/
+  /*flex-direction: column;
+  justify-content: center;*/
+  /*position: relative;
+  top: -50%;*/
+  /*vertical-align: middle;*/
+}
+
+.each-email div{
+  margin-top: 10px;
+  /*border: 1px solid red;
+  margin-right: 100px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);*/
+}
+
+.each-email i{
+  /*top: 50%;
+  transform: translateY(-50%);*/
+}
+
+.email-check{
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.email-star{
+  margin-right: 50px;
 }
 
 .select-dropdown{
