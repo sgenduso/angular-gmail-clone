@@ -18,11 +18,30 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     });
   };
 
+  var selectOne = function (index, storageObj) {
+    // console.log(storageObj.selectedArray);
+    storageObj.selectedArray[index] = !storageObj.selectedArray[index];
+    checkSelectedStatus(storageObj);
+    console.log(storageObj.selectedArray);
+  };
 
+  var checkSelectedStatus = function (storageObj) {
+    var trueCount = 0;
+    var falseCount = 0;
+    var selections = storageObj.selectedArray;
+    selections.forEach(function (selected) {
+      selected ? trueCount++ : falseCount++;
+    });
+    storageObj.allSelected = trueCount === selections.length;
+    storageObj.noneSelected = falseCount === selections.length;
+    storageObj.someSelected = trueCount < selections.length && falseCount < selections.length;
+  };
 
   return {
     getEmails: getEmails,
     allSelectedArray: allSelectedArray,
-    noneSelectedArray: noneSelectedArray
+    noneSelectedArray: noneSelectedArray,
+    selectOne: selectOne,
+    checkSelectedStatus: checkSelectedStatus,
   };
 }]);

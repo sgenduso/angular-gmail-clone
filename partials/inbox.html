@@ -1,10 +1,11 @@
 <div class='button-bar'>
   <a class='btn btn-default btn-checkbox'>
-    <i class='fa fa-square-o' ng-hide='allSelected' ng-click='toggleSelection(); selectAll()'></i>
-    <i class='fa fa-check-square-o' ng-show='allSelected' ng-click='toggleSelection(); deselectAll()'></i>
+    <i class='fa fa-square-o' ng-show='storage.noneSelected' ng-click='selectAll()'></i>
+    <i class='fa fa-check-square-o' ng-show='storage.allSelected' ng-click='deselectAll()'></i>
+    <i class='fa fa-minus-square-o' ng-show='storage.someSelected' ng-click='deselectAll()'></i>
   </a>
-  <a class='btn btn-default' ng-disabled='!allSelected'>Mark as Read</a>
-  <a class='btn btn-default' ng-disabled='!allSelected'>Mark as Unread</a>
+  <a class='btn btn-default' ng-disabled='!storage.allSelected'>Mark as Read</a>
+  <a class='btn btn-default' ng-disabled='!storage.allSelected'>Mark as Unread</a>
   <select class='btn btn-default select-dropdown'>
     <option selected disabled value='Apply Label'>Apply Label</option>
     <option value='Create New'>Create New</option>
@@ -12,13 +13,13 @@
   <select class='btn btn-default select-dropdown'>
     <option selected disabled value='Remove Label'>Remove Label</option>
   </select>
-  <a class='btn btn-default btn-checkbox' ng-disabled='!allSelected'>
+  <a class='btn btn-default btn-checkbox' ng-disabled='!storage.allSelected'>
     <i class='fa fa-trash-o'></i>
   </a>
 </div>
-<div class='each-email' ng-repeat='email in emails'>
+<div class='each-email' ng-repeat='email in emails track by $index'>
   <div class='email-check'>
-  <input type='checkbox' ng-checked='allSelected' />
+  <input type='checkbox' ng-checked='storage.selectedArray[$index]' ng-click='selectOne($index, storage)'/>
   <!-- <i class='fa fa-square-o email-check'></i> -->
   </div>
   <!-- <i class='fa fa-check-square'></i> -->
