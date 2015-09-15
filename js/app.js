@@ -1,4 +1,4 @@
-var app = angular.module('angular-gmail-clone', ['ngRoute']);
+var app = angular.module('angular-gmail-clone', ['ngRoute', 'ngStorage']);
 
 app.config(function ($routeProvider, $locationProvider) {
   $routeProvider

@@ -1,7 +1,7 @@
 <div class='button-bar'>
   <a class='btn btn-default btn-checkbox'>
-    <i class='fa fa-square-o' ng-hide='allSelected' ng-click='toggleSelection()'></i>
-    <i class='fa fa-check-square-o' ng-show='allSelected' ng-click='toggleSelection()'></i>
+    <i class='fa fa-square-o' ng-hide='allSelected' ng-click='toggleSelection(); selectAll()'></i>
+    <i class='fa fa-check-square-o' ng-show='allSelected' ng-click='toggleSelection(); deselectAll()'></i>
   </a>
   <a class='btn btn-default' ng-disabled='!allSelected'>Mark as Read</a>
   <a class='btn btn-default' ng-disabled='!allSelected'>Mark as Unread</a>
@@ -27,4 +27,7 @@
   <!-- </div> -->
   <!-- <i class='fa fa-star'></i> -->
   <div class='subject' ng-model='subject'>{{email.subject}}</div>
+</div>
+<div>
+  <!-- {{storage.selectedArray}} -->
 </div>
