@@ -48,3 +48,7 @@ html{
 .select-dropdown{
   height: 34px;
 }
+
+.selected{
+  background-color: #FEFECB;
+}

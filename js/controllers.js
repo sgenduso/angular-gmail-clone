@@ -28,4 +28,11 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     EmailsService.selectOne(index, storageObj);
   };
 
+  $scope.toggleStarred = function (email) {
+    EmailsService.toggleStarred(email)
+    .then(function (emails) {
+      $scope.emails = emails;
+    });
+  };
+
 }]);

@@ -19,7 +19,6 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
   };
 
   var selectOne = function (index, storageObj) {
-    // console.log(storageObj.selectedArray);
     storageObj.selectedArray[index] = !storageObj.selectedArray[index];
     checkSelectedStatus(storageObj);
     console.log(storageObj.selectedArray);
@@ -37,11 +36,20 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     storageObj.someSelected = trueCount < selections.length && falseCount < selections.length;
   };
 
+  var toggleStarred = function (email) {
+    // email.starred = !email.starred;
+    return $http.post('http://localhost:3000/api/starred', email)
+    .then(function (emails) {
+      return emails.data;
+    });
+  };
+
   return {
     getEmails: getEmails,
     allSelectedArray: allSelectedArray,
     noneSelectedArray: noneSelectedArray,
     selectOne: selectOne,
     checkSelectedStatus: checkSelectedStatus,
+    toggleStarred: toggleStarred,
   };
 }]);
