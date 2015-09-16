@@ -44,6 +44,24 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     });
   };
 
+  var markAsRead = function (selectedEmails, allEmails) {
+    return selectedEmails.forEach(function (selected, i) {
+      if (selected) {
+        allEmails[i].read = true;
+        $http.post('http://localhost:3000/api/read', allEmails[i]);
+      }
+    });
+  };
+
+  var markUnread = function (selectedEmails, allEmails) {
+    return selectedEmails.forEach(function (selected, i) {
+      if (selected) {
+        allEmails[i].read = false;
+        $http.post('http://localhost:3000/api/read', allEmails[i]);
+      }
+    });
+  };
+
   return {
     getEmails: getEmails,
     allSelectedArray: allSelectedArray,
@@ -51,5 +69,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     selectOne: selectOne,
     checkSelectedStatus: checkSelectedStatus,
     toggleStarred: toggleStarred,
+    markAsRead: markAsRead,
+    markUnread: markUnread,
   };
 }]);

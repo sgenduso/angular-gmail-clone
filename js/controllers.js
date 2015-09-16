@@ -35,4 +35,18 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     });
   };
 
+  $scope.markAsRead = function () {
+    EmailsService.markAsRead($scope.storage.selectedArray, $scope.emails)
+    .then(function (emails) {
+      $scope.emails = emails;
+    });
+  };
+
+  $scope.markUnread = function () {
+    EmailsService.markUnread($scope.storage.selectedArray, $scope.emails)
+    .then(function (emails) {
+      $scope.emails = emails;
+    });
+  };
+
 }]);

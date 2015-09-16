@@ -49,6 +49,14 @@ html{
   height: 34px;
 }
 
+.unread{
+  font-weight: bold;
+}
+
+.read{
+  background-color: LightGrey;
+}
+
 .selected{
   background-color: #FEFECB;
 }
