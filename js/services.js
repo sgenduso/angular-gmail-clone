@@ -137,7 +137,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
         }
       });
     });
-    return labels;
+    return labels.sort();
   };
 
   return {

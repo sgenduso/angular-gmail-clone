@@ -1,4 +1,4 @@
-app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '$sessionStorage', function ($scope, EmailsService, $localStorage, $sessionStorage) {
+app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '$sessionStorage', '$modal', '$log', function ($scope, EmailsService, $localStorage, $sessionStorage, $modal, $log) {
   $scope.storage = $localStorage;
 
 
@@ -95,6 +95,29 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
 
   $scope.populateLabels = function () {
     $scope.labels = EmailsService.populateLabels($scope.emails);
+  };
+
+  $scope.openModal = function (size) {
+
+    var modalInstance = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: './partials/compose-modal.html',
+      controller: function ($scope, $modalInstance) {
+
+      },
+      size: size,
+      resolve: {
+        subject: function () {
+          return $scope.subject;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
   };
 
 

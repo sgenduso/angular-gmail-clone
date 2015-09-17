@@ -1,4 +1,8 @@
+<div class='header-bar navbar navbar-fixed-top'>
+  <img src='nGoogle_logo.png' alt='logo'/>
+</div>
 <div class='button-bar'>
+  <span>nGmail <i class='fa fa-caret-down'></i></span>
   <a class='btn btn-default btn-checkbox'>
     <i class='fa fa-square-o' ng-show='storage.noneSelected' ng-click='selectAll()'></i>
     <i class='fa fa-check-square-o' ng-show='storage.allSelected' ng-click='deselectAll()'></i>
@@ -30,14 +34,19 @@
     </form>
   </div>
 </div>
-<div class='each-email' ng-repeat='email in emails track by $index'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">
-  <div class='email-check'>
-  <input type='checkbox' ng-checked='storage.selectedArray[$index]' ng-click='selectOne($index, storage)'/>
+<div class='sidebar'>
+  <a class='btn btn-danger btn-checkbox' id='compose' ng-click='openModal("sm")'>COMPOSE</a>
+</div>
+<div class='the-rest'>
+  <div class='each-email' ng-repeat='email in emails track by $index | orderBy : email._id'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">
+    <div class='email-check'>
+    <input type='checkbox' ng-checked='storage.selectedArray[$index]' ng-click='selectOne($index, storage)'/>
+    </div>
+    <i class='fa fa-star-o email-star' ng-show='email.starred === false' ng-click='toggleStarred(email)'></i>
+    <i class='fa fa-star email-star' ng-show='email.starred === true' ng-click='toggleStarred(email)'></i>
+    <div ng-repeat='label in email.filters.sort()' class='labels'>
+      {{label}}
+    </div>
+    <div class='subject' ng-model='subject'>{{email.subject}}</div>
   </div>
-  <i class='fa fa-star-o email-star' ng-show='email.starred === false' ng-click='toggleStarred(email)'></i>
-  <i class='fa fa-star email-star' ng-show='email.starred === true' ng-click='toggleStarred(email)'></i>
-  <div ng-repeat='label in email.filters.sort()' class='labels'>
-    {{label}}
-  </div>
-  <div class='subject' ng-model='subject'>{{email.subject}}</div>
 </div>

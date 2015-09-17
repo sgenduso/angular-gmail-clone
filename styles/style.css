@@ -7,7 +7,17 @@ html{
 }
 
 .button-bar{
+  margin-top: 50px;
   margin-bottom: 15px;
+}
+
+.button-bar a:first-of-type{
+  margin-left: 180px;
+}
+
+.button-bar span:first-child{
+  font-size: 1.4em;
+  color: #E84840;
 }
 
 .each-email{
@@ -47,6 +57,7 @@ html{
 
 .select-dropdown{
   height: 34px;
+  border-radius: 2px;
 }
 
 .unread{
@@ -76,4 +87,46 @@ html{
   font-weight: normal;
   margin-right: 3px;
   border-radius: 2px;
+}
+
+.header-bar{
+  height: 60px;
+  background-color: #F4F4F4;
+  border-bottom: solid 1px #EFEFEF;
+  /*margin: 0 !important;*/
+  margin-bottom: 10px;
+  padding: 0px !important;
+}
+
+.header-bar img{
+  height: 50%;
+  margin-top: 17px;
+  margin-left: 15px;
+}
+
+.btn{
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: .9em;
+}
+
+select{
+  border-radius: 2px;
+}
+
+.sidebar{
+  display: inline-block;
+  width: 20%;
+  border: 2px solid red;
+  vertical-align: top;
+}
+
+.the-rest{
+  display: inline-block;
+  width: 78%;
+  border: 2px solid black;
+}
+
+#compose{
+  vertical-align: top;
 }
