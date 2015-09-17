@@ -16,22 +16,17 @@
   <a class='btn btn-default btn-checkbox' ng-disabled='storage.noneSelected' ng-click='delete()'>
     <i class='fa fa-trash-o'></i>
   </a>
-  <div id='newLabel' ng-show='addingLabel'>
-    <form ng-submit='addLabel(newLabel)'>
-      <input type='text' ng-model='newLabel'/>
-    </form>
-  </div>
   <div class='unread-count' ng-show='unreadCount > 0'>
     <ng-pluralize count='unreadCount'
                        when='{"1": "1 Unread Message",
                               "other": "{} Unread Messages"}'>{{unreadCount}}</ng-pluralize>
   </div>
-
-  <ng-pluralize count="personCount"
-                 when="{'0': 'Nobody is viewing.',
-                     'one': '1 person is viewing.',
-                     'other': '{} people are viewing.'}">
-</ng-pluralize>
+  <div id='newLabel' ng-show='addingLabel'>
+    Add a new Label:
+    <form ng-submit='addLabel(newLabel)'>
+      <input type='text' ng-model='newLabel' class='form-control'/>
+    </form>
+  </div>
 </div>
 <div class='each-email' ng-repeat='email in emails track by $index'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">
   <div class='email-check'>
@@ -39,6 +34,9 @@
   </div>
   <i class='fa fa-star-o email-star' ng-show='email.starred === false' ng-click='toggleStarred(email)'></i>
   <i class='fa fa-star email-star' ng-show='email.starred === true' ng-click='toggleStarred(email)'></i>
+  <div ng-repeat='label in email.filters' class='labels'>
+    {{label}}
+  </div>
   <div class='subject' ng-model='subject'>{{email.subject}}</div>
 </div>
 <div>

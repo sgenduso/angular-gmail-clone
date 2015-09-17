@@ -103,8 +103,16 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     }
   };
 
-  var addLabel = function (label) {
-
+  var addLabel = function (label, selectedEmails, allEmails) {
+    var promises = [];
+    selectedEmails.forEach(function (selected, i) {
+      if (selected) {
+        console.log(allEmails[i]);
+        allEmails[i].filters.push(label);
+        promises.push($http.post('http://localhost:3000/api/filters', allEmails[i]));
+      }
+    });
+    return Promise.all(promises);
   };
 
   return {
@@ -118,6 +126,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     markUnread: markUnread,
     unreadCount: unreadCount,
     deleteEmails: deleteEmails,
-    showLabelInput: showLabelInput
+    showLabelInput: showLabelInput,
+    addLabel: addLabel
   };
 }]);

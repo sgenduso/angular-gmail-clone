@@ -64,3 +64,12 @@ html{
 .unread-count{
   display: inline-block;
 }
+
+.form-control{
+  width: 200px !important;
+}
+
+.labels{
+  display: inline-block;
+  background-color: #EEC967;
+}

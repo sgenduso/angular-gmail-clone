@@ -74,5 +74,13 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     $scope.addingLabel =  EmailsService.showLabelInput(selectedLabel);
   };
 
+  $scope.addLabel = function (label) {
+    return EmailsService.addLabel(label, $scope.storage.selectedArray, $scope.emails)
+    .then(function (emails) {
+      $scope.emails = emails[emails.length-1].data;
+      $scope.getEmails();
+    });
+  };
+
 
 }]);
