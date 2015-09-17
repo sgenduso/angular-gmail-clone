@@ -36,7 +36,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
   };
 
   var toggleStarred = function (email) {
-    // email.starred = !email.starred;
+    email.starred = !email.starred;
     return $http.post('http://localhost:3000/api/starred', email)
     .then(function (emails) {
       return emails.data;
@@ -108,11 +108,25 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     selectedEmails.forEach(function (selected, i) {
       if (selected) {
         console.log(allEmails[i]);
-        allEmails[i].filters.push(label);
-        promises.push($http.post('http://localhost:3000/api/filters', allEmails[i]));
+        if (allEmails[i].filters.indexOf(label) < 0) {
+          allEmails[i].filters.push(label);
+          promises.push($http.post('http://localhost:3000/api/filters', allEmails[i]));
+        }
       }
     });
     return Promise.all(promises);
+  };
+
+  var populateLabels = function (emails) {
+    var labels = [];
+    emails.forEach(function (email) {
+      email.filters.forEach(function (filter) {
+        if (labels.indexOf(filter) < 0) {
+          labels.push(filter);
+        }
+      });
+    });
+    return labels;
   };
 
   return {
@@ -127,6 +141,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     unreadCount: unreadCount,
     deleteEmails: deleteEmails,
     showLabelInput: showLabelInput,
-    addLabel: addLabel
+    addLabel: addLabel,
+    populateLabels: populateLabels
   };
 }]);

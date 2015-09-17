@@ -8,10 +8,12 @@
   <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markUnread(); checkUnread()'>Mark as Unread</a>
   <select class='btn btn-default select-dropdown' ng-model='selectedLabel' ng-change='showLabelInput(selectedLabel)'>
     <option selected disabled value='Apply Label'>Apply Label</option>
+    <option ng-repeat="label in labels" value="{{label}}">{{label}}</option>
     <option value='Create New'>Create New</option>
   </select>
   <select class='btn btn-default select-dropdown'>
     <option selected disabled value='Remove Label'>Remove Label</option>
+    <option ng-repeat="label in labels" value="{{label}}">{{label}}</option>
   </select>
   <a class='btn btn-default btn-checkbox' ng-disabled='storage.noneSelected' ng-click='delete()'>
     <i class='fa fa-trash-o'></i>

@@ -72,4 +72,8 @@ html{
 .labels{
   display: inline-block;
   background-color: #EEC967;
+  padding: 2px;
+  font-weight: normal;
+  margin-right: 3px;
+  border-radius: 2px;
 }

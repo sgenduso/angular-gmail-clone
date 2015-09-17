@@ -7,6 +7,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     .then(function (emails) {
       $scope.emails = emails;
       $scope.checkUnread();
+      $scope.populateLabels();
     });
   };
 
@@ -80,6 +81,11 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
       $scope.emails = emails[emails.length-1].data;
       $scope.getEmails();
     });
+  };
+
+  $scope.populateLabels = function () {
+    $scope.labels = EmailsService.populateLabels($scope.emails);
+    console.log($scope.labels);
   };
 
 
