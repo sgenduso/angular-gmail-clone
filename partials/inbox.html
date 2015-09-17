@@ -6,7 +6,7 @@
   </a>
   <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markAsRead(); checkUnread()'>Mark as Read</a>
   <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markUnread(); checkUnread()'>Mark as Unread</a>
-  <select class='btn btn-default select-dropdown'>
+  <select class='btn btn-default select-dropdown' ng-model='selectedLabel' ng-change='showLabelInput(selectedLabel)'>
     <option selected disabled value='Apply Label'>Apply Label</option>
     <option value='Create New'>Create New</option>
   </select>
@@ -16,6 +16,11 @@
   <a class='btn btn-default btn-checkbox' ng-disabled='storage.noneSelected' ng-click='delete()'>
     <i class='fa fa-trash-o'></i>
   </a>
+  <div id='newLabel' ng-show='addingLabel'>
+    <form ng-submit='addLabel(newLabel)'>
+      <input type='text' ng-model='newLabel'/>
+    </form>
+  </div>
   <div class='unread-count' ng-show='unreadCount > 0'>
     <ng-pluralize count='unreadCount'
                        when='{"1": "1 Unread Message",

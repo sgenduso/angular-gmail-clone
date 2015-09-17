@@ -70,5 +70,9 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     });
   };
 
+  $scope.showLabelInput = function (selectedLabel) {
+    $scope.addingLabel =  EmailsService.showLabelInput(selectedLabel);
+  };
+
 
 }]);

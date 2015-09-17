@@ -94,6 +94,19 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     // });
   };
 
+
+
+  var showLabelInput = function (selectedLabel) {
+    console.log(selectedLabel);
+    if (selectedLabel === 'Create New') {
+      return true;
+    }
+  };
+
+  var addLabel = function (label) {
+
+  };
+
   return {
     getEmails: getEmails,
     allSelectedArray: allSelectedArray,
@@ -104,6 +117,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     markAsRead: markAsRead,
     markUnread: markUnread,
     unreadCount: unreadCount,
-    deleteEmails: deleteEmails
+    deleteEmails: deleteEmails,
+    showLabelInput: showLabelInput
   };
 }]);
