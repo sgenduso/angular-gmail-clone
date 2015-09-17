@@ -11,7 +11,7 @@
     <option ng-repeat="label in labels" value="{{label}}">{{label}}</option>
     <option value='Create New'>Create New</option>
   </select>
-  <select class='btn btn-default select-dropdown'>
+  <select class='btn btn-default select-dropdown' ng-model='labelToRemove' ng-change='removeLabel(labelToRemove)'>
     <option selected disabled value='Remove Label'>Remove Label</option>
     <option ng-repeat="label in labels" value="{{label}}">{{label}}</option>
   </select>
@@ -40,7 +40,4 @@
     {{label}}
   </div>
   <div class='subject' ng-model='subject'>{{email.subject}}</div>
-</div>
-<div>
-  {{emails.length}}
 </div>

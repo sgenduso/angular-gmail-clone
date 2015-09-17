@@ -97,7 +97,6 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
 
 
   var showLabelInput = function (selectedLabel) {
-    console.log(selectedLabel);
     if (selectedLabel === 'Create New') {
       return true;
     }
@@ -107,9 +106,21 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     var promises = [];
     selectedEmails.forEach(function (selected, i) {
       if (selected) {
-        console.log(allEmails[i]);
         if (allEmails[i].filters.indexOf(label) < 0) {
           allEmails[i].filters.push(label);
+          promises.push($http.post('http://localhost:3000/api/filters', allEmails[i]));
+        }
+      }
+    });
+    return Promise.all(promises);
+  };
+
+  var removeLabel = function (label, selectedEmails, allEmails) {
+    var promises = [];
+    selectedEmails.forEach(function (selected, i) {
+      if (selected) {
+        if (allEmails[i].filters.indexOf(label) > -1) {
+          allEmails[i].filters.splice(allEmails[i].filters.indexOf(label));
           promises.push($http.post('http://localhost:3000/api/filters', allEmails[i]));
         }
       }
@@ -142,6 +153,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     deleteEmails: deleteEmails,
     showLabelInput: showLabelInput,
     addLabel: addLabel,
+    removeLabel: removeLabel,
     populateLabels: populateLabels
   };
 }]);

@@ -83,9 +83,16 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     });
   };
 
+  $scope.removeLabel = function (label) {
+    return EmailsService.removeLabel(label, $scope.storage.selectedArray, $scope.emails)
+    .then(function (emails) {
+      $scope.emails = emails[emails.length-1].data;
+      $scope.getEmails();
+    });
+  };
+
   $scope.populateLabels = function () {
     $scope.labels = EmailsService.populateLabels($scope.emails);
-    console.log($scope.labels);
   };
 
 
