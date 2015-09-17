@@ -105,7 +105,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
   var addLabel = function (label, selectedEmails, allEmails) {
     var promises = [];
     selectedEmails.forEach(function (selected, i) {
-      if (selected) {
+      if (selected && label !== 'Create New') {
         if (allEmails[i].filters.indexOf(label) < 0) {
           allEmails[i].filters.push(label);
           promises.push($http.post('http://localhost:3000/api/filters', allEmails[i]));
@@ -120,7 +120,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     selectedEmails.forEach(function (selected, i) {
       if (selected) {
         if (allEmails[i].filters.indexOf(label) > -1) {
-          allEmails[i].filters.splice(allEmails[i].filters.indexOf(label));
+          allEmails[i].filters.splice(allEmails[i].filters.indexOf(label), 1);
           promises.push($http.post('http://localhost:3000/api/filters', allEmails[i]));
         }
       }

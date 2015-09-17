@@ -6,12 +6,12 @@
   </a>
   <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markAsRead(); checkUnread()'>Mark as Read</a>
   <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markUnread(); checkUnread()'>Mark as Unread</a>
-  <select class='btn btn-default select-dropdown' ng-model='selectedLabel' ng-change='showLabelInput(selectedLabel)'>
+  <select class='btn btn-default select-dropdown' ng-model='selectedLabel' ng-init='selectedLabel="Apply Label"' ng-change='showLabelInput(selectedLabel); addLabel(selectedLabel)'>
     <option selected disabled value='Apply Label'>Apply Label</option>
     <option ng-repeat="label in labels" value="{{label}}">{{label}}</option>
     <option value='Create New'>Create New</option>
   </select>
-  <select class='btn btn-default select-dropdown' ng-model='labelToRemove' ng-change='removeLabel(labelToRemove)'>
+  <select class='btn btn-default select-dropdown' ng-model='labelToRemove' ng-init='labelToRemove="Remove Label"' ng-change='removeLabel(labelToRemove)'>
     <option selected disabled value='Remove Label'>Remove Label</option>
     <option ng-repeat="label in labels" value="{{label}}">{{label}}</option>
   </select>
@@ -36,7 +36,7 @@
   </div>
   <i class='fa fa-star-o email-star' ng-show='email.starred === false' ng-click='toggleStarred(email)'></i>
   <i class='fa fa-star email-star' ng-show='email.starred === true' ng-click='toggleStarred(email)'></i>
-  <div ng-repeat='label in email.filters' class='labels'>
+  <div ng-repeat='label in email.filters.sort()' class='labels'>
     {{label}}
   </div>
   <div class='subject' ng-model='subject'>{{email.subject}}</div>

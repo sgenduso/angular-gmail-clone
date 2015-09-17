@@ -79,6 +79,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     return EmailsService.addLabel(label, $scope.storage.selectedArray, $scope.emails)
     .then(function (emails) {
       $scope.emails = emails[emails.length-1].data;
+      $scope.selectedLabel="Apply Label";
       $scope.getEmails();
     });
   };
@@ -87,6 +88,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     return EmailsService.removeLabel(label, $scope.storage.selectedArray, $scope.emails)
     .then(function (emails) {
       $scope.emails = emails[emails.length-1].data;
+      $scope.labelToRemove="Remove Label";
       $scope.getEmails();
     });
   };
