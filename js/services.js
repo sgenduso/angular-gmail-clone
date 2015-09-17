@@ -51,12 +51,10 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
          promises.push($http.post('http://localhost:3000/api/read', allEmails[i]));
       }
     });
-    return Promise.all(promises)
-    .then(function (emails) {
-      console.log('PROMISE.ALL');
-      console.log(emails[emails.length-1]);
-      return emails[emails.length-1].data;
-    });
+    return Promise.all(promises);
+    // .then(function (emails) {
+    //   return emails[emails.length-1].data;
+    // });
   };
 
   var markUnread = function (selectedEmails, allEmails) {
@@ -67,12 +65,10 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
         promises.push($http.post('http://localhost:3000/api/read', allEmails[i]));
       }
     });
-    return Promise.all(promises)
-    .then(function (emails) {
-      console.log('PROMISE.ALL');
-      console.log(emails[emails.length-1]);
-      return emails[emails.length-1].data;
-    });
+    return Promise.all(promises);
+    // .then(function (emails) {
+    //   return emails[emails.length-1].data;
+    // });
   };
 
   var unreadCount = function (emails) {
@@ -85,6 +81,19 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     return count;
   };
 
+  var deleteEmails = function (selectedEmails, allEmails) {
+    var promises = [];
+     selectedEmails.forEach(function (selected, i) {
+      if (selected) {
+        promises.push($http.post('http://localhost:3000/api/delete', allEmails[i]));
+      }
+    });
+    return Promise.all(promises);
+    // .then(function (emails) {
+    //   return emails[emails.length-1].data;
+    // });
+  };
+
   return {
     getEmails: getEmails,
     allSelectedArray: allSelectedArray,
@@ -94,6 +103,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     toggleStarred: toggleStarred,
     markAsRead: markAsRead,
     markUnread: markUnread,
-    unreadCount: unreadCount
+    unreadCount: unreadCount,
+    deleteEmails: deleteEmails
   };
 }]);

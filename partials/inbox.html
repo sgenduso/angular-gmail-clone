@@ -13,7 +13,7 @@
   <select class='btn btn-default select-dropdown'>
     <option selected disabled value='Remove Label'>Remove Label</option>
   </select>
-  <a class='btn btn-default btn-checkbox' ng-disabled='storage.noneSelected'>
+  <a class='btn btn-default btn-checkbox' ng-disabled='storage.noneSelected' ng-click='delete()'>
     <i class='fa fa-trash-o'></i>
   </a>
   <div class='unread-count' ng-show='unreadCount > 0'>
@@ -35,4 +35,7 @@
   <i class='fa fa-star-o email-star' ng-show='email.starred === false' ng-click='toggleStarred(email)'></i>
   <i class='fa fa-star email-star' ng-show='email.starred === true' ng-click='toggleStarred(email)'></i>
   <div class='subject' ng-model='subject'>{{email.subject}}</div>
+</div>
+<div>
+  {{emails.length}}
 </div>

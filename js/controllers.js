@@ -1,10 +1,20 @@
 app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '$sessionStorage', function ($scope, EmailsService, $localStorage, $sessionStorage) {
   $scope.storage = $localStorage;
-  EmailsService.getEmails()
-  .then(function (emails) {
-    $scope.emails = emails;
-    $scope.checkUnread();
-  });
+
+
+  $scope.getEmails = function () {
+    EmailsService.getEmails()
+    .then(function (emails) {
+      $scope.emails = emails;
+      $scope.checkUnread();
+    });
+  };
+
+  $scope.getEmails();
+
+  $scope.checkUnread = function () {
+    $scope.unreadCount = EmailsService.unreadCount($scope.emails);
+  };
 
   $scope.selectAll = function () {
     $scope.storage.selectedArray = EmailsService.allSelectedArray($scope.emails);
@@ -35,23 +45,30 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   $scope.markAsRead = function () {
    return EmailsService.markAsRead($scope.storage.selectedArray, $scope.emails)
     .then(function (emails) {
-      $scope.emails = emails;
+      $scope.emails = emails[emails.length-1].data;
+      console.log($scope.emails);
       //checkUnread() only works if you click Mark as Read twice??
-      // $scope.checkUnread();
+      $scope.checkUnread();
     });
   };
 
   $scope.markUnread = function () {
     return EmailsService.markUnread($scope.storage.selectedArray, $scope.emails)
     .then(function (emails) {
-      $scope.emails = emails;
+      $scope.emails = emails[emails.length-1].data;
+      console.log($scope.emails);
       //checkUnread() only works if you click Mark as Read twice??
-      // $scope.checkUnread();
+      $scope.checkUnread();
     });
   };
 
-  $scope.checkUnread = function () {
-    $scope.unreadCount = EmailsService.unreadCount($scope.emails);
+  $scope.delete = function () {
+    return EmailsService.deleteEmails($scope.storage.selectedArray, $scope.emails)
+    .then(function (emails) {
+      $scope.emails = emails[emails.length-1].data;
+      $scope.getEmails();
+    });
   };
+
 
 }]);
