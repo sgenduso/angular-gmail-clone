@@ -60,3 +60,7 @@ html{
 .selected{
   background-color: #FEFECB;
 }
+
+.unread-count{
+  display: inline-block;
+}

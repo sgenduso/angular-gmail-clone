@@ -21,7 +21,6 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
   var selectOne = function (index, storageObj) {
     storageObj.selectedArray[index] = !storageObj.selectedArray[index];
     checkSelectedStatus(storageObj);
-    console.log(storageObj.selectedArray);
   };
 
   var checkSelectedStatus = function (storageObj) {
@@ -45,21 +44,45 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
   };
 
   var markAsRead = function (selectedEmails, allEmails) {
-    return selectedEmails.forEach(function (selected, i) {
+    var promises = [];
+     selectedEmails.forEach(function (selected, i) {
       if (selected) {
         allEmails[i].read = true;
-        $http.post('http://localhost:3000/api/read', allEmails[i]);
+         promises.push($http.post('http://localhost:3000/api/read', allEmails[i]));
       }
+    });
+    return Promise.all(promises)
+    .then(function (emails) {
+      console.log('PROMISE.ALL');
+      console.log(emails[emails.length-1]);
+      return emails[emails.length-1].data;
     });
   };
 
   var markUnread = function (selectedEmails, allEmails) {
-    return selectedEmails.forEach(function (selected, i) {
+    var promises = [];
+     selectedEmails.forEach(function (selected, i) {
       if (selected) {
         allEmails[i].read = false;
-        $http.post('http://localhost:3000/api/read', allEmails[i]);
+        promises.push($http.post('http://localhost:3000/api/read', allEmails[i]));
       }
     });
+    return Promise.all(promises)
+    .then(function (emails) {
+      console.log('PROMISE.ALL');
+      console.log(emails[emails.length-1]);
+      return emails[emails.length-1].data;
+    });
+  };
+
+  var unreadCount = function (emails) {
+    var count = 0;
+    emails.forEach(function (email) {
+      if (email.read === false) {
+        count++;
+      }
+    });
+    return count;
   };
 
   return {
@@ -71,5 +94,6 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     toggleStarred: toggleStarred,
     markAsRead: markAsRead,
     markUnread: markUnread,
+    unreadCount: unreadCount
   };
 }]);

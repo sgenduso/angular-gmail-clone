@@ -3,6 +3,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   EmailsService.getEmails()
   .then(function (emails) {
     $scope.emails = emails;
+    $scope.checkUnread();
   });
 
   $scope.selectAll = function () {
@@ -10,8 +11,6 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     $scope.storage.allSelected = true;
     $scope.storage.noneSelected = false;
     $scope.storage.someSelected = false;
-    console.log($scope.storage.allSelected, $scope.storage.noneSelected, $scope.storage.someSelected);
-    console.log($scope.storage.selectedArray);
 
   };
 
@@ -20,8 +19,6 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     $scope.storage.allSelected = false;
     $scope.storage.noneSelected = true;
     $scope.storage.someSelected = false;
-    console.log($scope.storage.allSelected, $scope.storage.noneSelected, $scope.storage.someSelected);
-    console.log($scope.storage.selectedArray);
   };
 
   $scope.selectOne = function (index, storageObj) {
@@ -29,24 +26,32 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   };
 
   $scope.toggleStarred = function (email) {
-    EmailsService.toggleStarred(email)
+    return EmailsService.toggleStarred(email)
     .then(function (emails) {
       $scope.emails = emails;
     });
   };
 
   $scope.markAsRead = function () {
-    EmailsService.markAsRead($scope.storage.selectedArray, $scope.emails)
+   return EmailsService.markAsRead($scope.storage.selectedArray, $scope.emails)
     .then(function (emails) {
       $scope.emails = emails;
+      //checkUnread() only works if you click Mark as Read twice??
+      // $scope.checkUnread();
     });
   };
 
   $scope.markUnread = function () {
-    EmailsService.markUnread($scope.storage.selectedArray, $scope.emails)
+    return EmailsService.markUnread($scope.storage.selectedArray, $scope.emails)
     .then(function (emails) {
       $scope.emails = emails;
+      //checkUnread() only works if you click Mark as Read twice??
+      // $scope.checkUnread();
     });
+  };
+
+  $scope.checkUnread = function () {
+    $scope.unreadCount = EmailsService.unreadCount($scope.emails);
   };
 
 }]);

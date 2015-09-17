@@ -4,8 +4,8 @@
     <i class='fa fa-check-square-o' ng-show='storage.allSelected' ng-click='deselectAll()'></i>
     <i class='fa fa-minus-square-o' ng-show='storage.someSelected' ng-click='deselectAll()'></i>
   </a>
-  <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markAsRead()'>Mark as Read</a>
-  <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markUnread()'>Mark as Unread</a>
+  <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markAsRead(); checkUnread()'>Mark as Read</a>
+  <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markUnread(); checkUnread()'>Mark as Unread</a>
   <select class='btn btn-default select-dropdown'>
     <option selected disabled value='Apply Label'>Apply Label</option>
     <option value='Create New'>Create New</option>
@@ -16,6 +16,9 @@
   <a class='btn btn-default btn-checkbox' ng-disabled='storage.noneSelected'>
     <i class='fa fa-trash-o'></i>
   </a>
+  <div class='unread-count' ng-show='unreadCount > 0'>
+    <span>{{unreadCount}}</span> Unread Messages
+  </div>
 </div>
 <div class='each-email' ng-repeat='email in emails track by $index'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">
   <div class='email-check'>
