@@ -9,15 +9,16 @@ html{
 .button-bar{
   margin-top: 50px;
   margin-bottom: 15px;
+  margin-left: 10px;
 }
 
 .button-bar a:first-of-type{
-  margin-left: 180px;
+  margin-left: 48px;
 }
 
 .button-bar span:first-child{
   font-size: 1.4em;
-  color: #E84840;
+  color: #E84840;/
 }
 
 .each-email{
@@ -101,7 +102,7 @@ html{
 .header-bar img{
   height: 50%;
   margin-top: 17px;
-  margin-left: 15px;
+  margin-left: 22px;
 }
 
 .btn{
@@ -116,17 +117,19 @@ select{
 
 .sidebar{
   display: inline-block;
-  width: 20%;
-  border: 2px solid red;
+  width: 10%;
   vertical-align: top;
+  margin-left: 10px;
 }
 
 .the-rest{
   display: inline-block;
-  width: 78%;
-  border: 2px solid black;
+  width: 83%;
 }
 
 #compose{
   vertical-align: top;
+  font-size: .8em;
+  padding-left: 25px;
+  padding-right: 25px;
 }

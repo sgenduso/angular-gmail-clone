@@ -35,7 +35,7 @@
   </div>
 </div>
 <div class='sidebar'>
-  <a class='btn btn-danger btn-checkbox' id='compose' ng-click='openModal("sm")'>COMPOSE</a>
+  <a class='btn btn-danger btn-checkbox' id='compose' ng-click='openModal("sm", emails)'>COMPOSE</a>
 </div>
 <div class='the-rest'>
   <div class='each-email' ng-repeat='email in emails track by $index | orderBy : email._id'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">

@@ -97,13 +97,24 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     $scope.labels = EmailsService.populateLabels($scope.emails);
   };
 
-  $scope.openModal = function (size) {
+  $scope.openModal = function (size, emails) {
 
     var modalInstance = $modal.open({
       animation: $scope.animationsEnabled,
       templateUrl: './partials/compose-modal.html',
-      controller: function ($scope, $modalInstance) {
-
+      controller: function ($scope, $modalInstance, $http, EmailsService) {
+        $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+        };
+        $scope.ok = function (subject) {
+          return $http.post('http://localhost:3000/api/new', {subject: subject})
+          .then(function (emails) {
+            console.log($scope.$parent);
+            $scope.$parent.emails = emails.data;
+            // $scope.$parent.getEmails();
+            $scope.cancel();
+          });
+        };
       },
       size: size,
       resolve: {
