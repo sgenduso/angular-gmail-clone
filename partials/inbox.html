@@ -1,5 +1,6 @@
 <div class='header-bar navbar navbar-fixed-top'>
   <img src='nGoogle_logo.png' alt='logo'/>
+  <input type='text' class='form-control search' ng-model='query' />
 </div>
 <div class='button-bar'>
   <span>nGmail <i class='fa fa-caret-down'></i></span>
@@ -10,12 +11,12 @@
   </a>
   <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markAsRead(); checkUnread()'>Mark as Read</a>
   <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markUnread(); checkUnread()'>Mark as Unread</a>
-  <select class='btn btn-default select-dropdown' ng-model='selectedLabel' ng-init='selectedLabel="Apply Label"' ng-change='showLabelInput(selectedLabel); addLabel(selectedLabel)'>
+  <select class='btn btn-default select-dropdown' ng-model='selectedLabel' ng-init='selectedLabel="Apply Label"' ng-change='showLabelInput(selectedLabel); addLabel(selectedLabel)' ng-disabled='storage.noneSelected'>
     <option selected disabled value='Apply Label'>Apply Label</option>
     <option ng-repeat="label in labels" value="{{label}}">{{label}}</option>
     <option value='Create New'>Create New</option>
   </select>
-  <select class='btn btn-default select-dropdown' ng-model='labelToRemove' ng-init='labelToRemove="Remove Label"' ng-change='removeLabel(labelToRemove)'>
+  <select class='btn btn-default select-dropdown' ng-model='labelToRemove' ng-init='labelToRemove="Remove Label"' ng-change='removeLabel(labelToRemove)' ng-disabled='storage.noneSelected'>
     <option selected disabled value='Remove Label'>Remove Label</option>
     <option ng-repeat="label in labels" value="{{label}}">{{label}}</option>
   </select>
@@ -36,9 +37,10 @@
 </div>
 <div class='sidebar'>
   <a class='btn btn-danger btn-checkbox' id='compose' ng-click='openModal("sm", emails)'>COMPOSE</a>
+  <div> Inbox ({{unreadCount}}) </div>
 </div>
 <div class='the-rest'>
-  <div class='each-email' ng-repeat='email in emails track by $index | orderBy : email._id'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">
+  <div class='each-email' ng-repeat='email in emails | filter : query track by $index | orderBy : email._id'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">
     <div class='email-check'>
     <input type='checkbox' ng-checked='storage.selectedArray[$index]' ng-click='selectOne($index, storage)'/>
     </div>

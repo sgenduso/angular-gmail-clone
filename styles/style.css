@@ -10,6 +10,9 @@ html{
   margin-top: 50px;
   margin-bottom: 15px;
   margin-left: 10px;
+  border-bottom: solid 1px #EFEFEF;
+  padding-bottom: 8px;
+  padding-top: 6px;
 }
 
 .button-bar a:first-of-type{
@@ -52,6 +55,10 @@ html{
   margin-right: 10px;
 }
 
+.email-check{
+  margin-left: 20px;
+}
+
 .email-star{
   margin-right: 50px;
 }
@@ -78,7 +85,11 @@ html{
 }
 
 .form-control{
-  width: 200px !important;
+  border-radius: 2px;
+  display: inline-block;
+  width: 500px !important;
+  /*margin-top: 17px;*/
+  margin-left: 22px;
 }
 
 .labels{
@@ -113,6 +124,11 @@ html{
 
 select{
   border-radius: 2px;
+  -webkit-border-radius: 2px;
+  /*-webkit-appearance: none;*/
+  /*border: 0;
+  outline: 1px inset LightGrey;
+  outline-offset:-1px;*/
 }
 
 .sidebar{
@@ -120,6 +136,13 @@ select{
   width: 10%;
   vertical-align: top;
   margin-left: 10px;
+}
+
+.sidebar div{
+  font-weight: bold;
+  font-size: .9em;
+  margin-top: 10px;
+  color: #E84840;
 }
 
 .the-rest{
