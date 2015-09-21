@@ -16,7 +16,7 @@ html{
 }
 
 .button-bar a:first-of-type{
-  margin-left: 72px;
+  margin-left: 48px;
 }
 
 .button-bar span:first-child{
@@ -85,11 +85,11 @@ html{
 }
 
 .form-control{
-  border-radius: 0px;
+  border-radius: 2px;
   display: inline-block;
-  width: 600px !important;
-  margin-top: 12px;
-  margin-left: 47px;
+  width: 500px !important;
+  /*margin-top: 17px;*/
+  margin-left: 22px;
 }
 
 .labels{
@@ -112,7 +112,7 @@ html{
 
 .header-bar img{
   height: 50%;
-  /*margin-top: 17px;*/
+  margin-top: 17px;
   margin-left: 22px;
 }
 
@@ -133,7 +133,7 @@ select{
 
 .sidebar{
   display: inline-block;
-  width: 12%;
+  width: 10%;
   vertical-align: top;
   margin-left: 10px;
 }
@@ -142,18 +142,12 @@ select{
   font-weight: bold;
   font-size: .9em;
   margin-top: 10px;
-}
-.sidebar div:hover{
-  cursor: pointer;
-}
-
-.red-text{
   color: #E84840;
 }
 
 .the-rest{
   display: inline-block;
-  width: 80%;
+  width: 83%;
 }
 
 #compose{

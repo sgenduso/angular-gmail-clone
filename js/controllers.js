@@ -17,36 +17,6 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     $scope.unreadCount = EmailsService.unreadCount($scope.emails);
   };
 
-  $scope.toggleThing = function (thing) {
-    thing = !thing;
-  };
-
-  $scope.fullInbox = '';
-  $scope.starredInbox = '';
-  $scope.unreadInbox = '';
-  $scope.filterStatus = ''
-
-  $scope.toggleFullInbox = function () {
-    $scope.fullInbox = '';
-    $scope.starredInbox = '';
-    $scope.unreadInbox = '';
-    $scope.filterStatus = ''
-  };
-
-  $scope.toggleStarredInbox = function () {
-    $scope.fullInbox = '';
-    $scope.starredInbox = {starred: true};
-    $scope.unreadInbox = '';
-    $scope.filterStatus = 'starred'
-  };
-
-  $scope.toggleUnreadInbox = function () {
-    $scope.fullInbox = '';
-    $scope.starredInbox = '';
-    $scope.unreadInbox = {read: false};
-    $scope.filterStatus = 'unread'
-  };
-
   $scope.selectAll = function () {
     $scope.storage.selectedArray = EmailsService.allSelectedArray($scope.emails);
     $scope.storage.allSelected = true;
