@@ -37,10 +37,12 @@
 </div>
 <div class='sidebar'>
   <a class='btn btn-danger btn-checkbox' id='compose' ng-click='openModal("sm", emails)'>COMPOSE</a>
-  <div> Inbox ({{unreadCount}}) </div>
+  <div ng-model='fullInbox' ng-click='toggleFullInbox()' ng-class="{'red-text': filterStatus === ''}"> Inbox ({{unreadCount}}) </div>
+  <div ng-model='starredInbox' ng-click='toggleStarredInbox()' ng-class="{'red-text': filterStatus === 'starred'}"> Starred </div>
+  <div ng-model='unreadInbox' ng-click='toggleUnreadInbox()' ng-class="{'red-text': filterStatus === 'unread'}"> Unread </div>
 </div>
 <div class='the-rest'>
-  <div class='each-email' ng-repeat='email in emails | filter : query track by $index | orderBy : email._id'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">
+  <div class='each-email' ng-repeat='email in (emails | filter : query | filter : fullInbox | filter : starredInbox | filter : unreadInbox) track by $index | orderBy : email._id'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">
     <div class='email-check'>
     <input type='checkbox' ng-checked='storage.selectedArray[$index]' ng-click='selectOne($index, storage)'/>
     </div>

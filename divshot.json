@@ -1,0 +1,9 @@
+{
+  "name": "angular-gmail-clone",
+  "root": "./",
+  "clean_urls": true,
+  "error_page": "error.html",
+  "routes": {
+    "**": "index.html"
+  }
+}
