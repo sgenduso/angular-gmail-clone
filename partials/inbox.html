@@ -28,15 +28,15 @@
                        when='{"1": "1 Unread Message",
                               "other": "{} Unread Messages"}'>{{unreadCount}}</ng-pluralize>
   </div>
-  <div id='newLabel' ng-show='addingLabel'>
+  <!-- <div id='newLabel' ng-show='addingLabel'>
     Add a new Label:
     <form ng-submit='addLabel(newLabel)'>
       <input type='text' ng-model='newLabel' class='form-control'/>
     </form>
-  </div>
+  </div> -->
 </div>
 <div class='sidebar'>
-  <a class='btn btn-danger btn-checkbox' id='compose' ng-click='openModal("sm", emails)'>COMPOSE</a>
+  <a class='btn btn-danger btn-checkbox' id='compose' ng-click='openComposeModal("sm", emails)'>COMPOSE</a>
   <div ng-model='fullInbox' ng-click='toggleFullInbox()' ng-class="{'red-text': filterStatus === ''}"> Inbox ({{unreadCount}}) </div>
   <div ng-model='starredInbox' ng-click='toggleStarredInbox()' ng-class="{'red-text': filterStatus === 'starred'}"> Starred </div>
   <div ng-model='unreadInbox' ng-click='toggleUnreadInbox()' ng-class="{'red-text': filterStatus === 'unread'}"> Unread </div>

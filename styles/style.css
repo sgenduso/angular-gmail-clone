@@ -167,3 +167,12 @@ select{
   width: 100%;
   border-radius: 0px;
 }
+
+.modal-content{
+  border-radius: 0px;
+  margin-top: 30%;
+}
+
+.modal-header, .modal-footer{
+  /*background-color: #EFEFEF;*/
+}

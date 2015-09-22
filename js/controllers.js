@@ -103,7 +103,10 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   };
 
   $scope.showLabelInput = function (selectedLabel) {
-    $scope.addingLabel =  EmailsService.showLabelInput(selectedLabel);
+    if (selectedLabel === 'Create New') {
+      return $scope.openLabelModal("sm", $scope.storage.selectedArray, $scope.emails);
+    }
+    // $scope.addingLabel =  EmailsService.showLabelInput(selectedLabel);
   };
 
   $scope.addLabel = function (label) {
@@ -128,7 +131,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     $scope.labels = EmailsService.populateLabels($scope.emails);
   };
 
-  $scope.openModal = function (size, emails) {
+  $scope.openComposeModal = function (size, emails) {
 
     var modalInstance = $modal.open({
       animation: $scope.animationsEnabled,
@@ -140,11 +143,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
         $scope.ok = function (subject) {
           return $http.post('http://localhost:3000/api/new', {subject: subject})
           .then(function (emails) {
-            // console.log($scope);
-            // $scope.$parent.emails = emails.data;
-            // $scope.$parent.getEmails();
             $modalInstance.close(emails);
-            console.log(emails);
             return emails;
           });
         };
@@ -158,11 +157,52 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     });
 
     modalInstance.result.then(function (results) {
-      console.log(results);
-      console.log($scope);
-      // console.log(emails);
-      // console.log(items);
       $scope.emails = results.data.reverse();
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $scope.openLabelModal = function (size, selectedEmails, allEmails) {
+
+    var modalInstance = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: './partials/label-modal.html',
+      controller: function ($scope, $modalInstance, $http, selectedEmails, allEmails) {
+        $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+        };
+        $scope.ok = function (label) {
+            var promises = [];
+            selectedEmails.forEach(function (selected, i) {
+              if (selected) {
+                if (allEmails[i].filters.indexOf(label) < 0) {
+                  allEmails[i].filters.push(label);
+                  promises.push($http.post('http://localhost:3000/api/filters', allEmails[i]));
+                }
+              }
+            });
+            return Promise.all(promises)
+          .then(function (emails) {
+            $modalInstance.close(emails);
+          });
+        };
+      },
+      size: size,
+      resolve: {
+        selectedEmails: function () {
+          return selectedEmails;
+        },
+        allEmails: function () {
+          return allEmails;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (results) {
+      $scope.emails = results[results.length-1].data.reverse();
+      $scope.populateLabels();
+      $scope.selectedLabel="Apply Label";
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });
