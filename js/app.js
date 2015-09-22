@@ -7,16 +7,6 @@ app.config(function ($routeProvider, $locationProvider) {
     templateUrl: 'partials/inbox.html',
     controller: 'InboxController'
   });
-  // .when('/compose', {
-  //   templateUrl: 'partials/compose-modal.html',
-  //   controller: 'InboxController'
-  // });
 
   $locationProvider.html5Mode(true);
 });
-
-// app.run(function($rootScope, $templateCache) {
-//    $rootScope.$on('$viewContentLoaded', function() {
-//       $templateCache.removeAll();
-//    });
-// });

@@ -8,6 +8,13 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
       $scope.emails = emails.reverse();
       $scope.checkUnread();
       $scope.populateLabels();
+
+  $scope.storage.selectedArray = $scope.storage.selectedArray || $scope.emails.map(function (email) {
+      return false;
+  });
+  $scope.storage.allSelected = $scope.storage.allSelected || false;
+  $scope.storage.noneSelected = $scope.storage.noneSelected || false;
+  $scope.storage.someSelected = $scope.storage.someSelected || false;
     });
   };
 
