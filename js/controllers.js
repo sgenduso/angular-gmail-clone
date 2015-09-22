@@ -5,7 +5,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   $scope.getEmails = function () {
     EmailsService.getEmails()
     .then(function (emails) {
-      $scope.emails = emails;
+      $scope.emails = emails.reverse();
       $scope.checkUnread();
       $scope.populateLabels();
     });
@@ -70,14 +70,14 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   $scope.toggleStarred = function (email) {
     return EmailsService.toggleStarred(email)
     .then(function (emails) {
-      $scope.emails = emails;
+      $scope.emails = emails.reverse();
     });
   };
 
   $scope.markAsRead = function () {
    return EmailsService.markAsRead($scope.storage.selectedArray, $scope.emails)
     .then(function (emails) {
-      $scope.emails = emails[emails.length-1].data;
+      $scope.emails = emails[emails.length-1].data.reverse();
       console.log($scope.emails);
       //checkUnread() only works if you click Mark as Read twice??
       $scope.checkUnread();
@@ -87,7 +87,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   $scope.markUnread = function () {
     return EmailsService.markUnread($scope.storage.selectedArray, $scope.emails)
     .then(function (emails) {
-      $scope.emails = emails[emails.length-1].data;
+      $scope.emails = emails[emails.length-1].data.reverse();
       console.log($scope.emails);
       //checkUnread() only works if you click Mark as Read twice??
       $scope.checkUnread();
@@ -97,7 +97,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   $scope.delete = function () {
     return EmailsService.deleteEmails($scope.storage.selectedArray, $scope.emails)
     .then(function (emails) {
-      $scope.emails = emails[emails.length-1].data;
+      $scope.emails = emails[emails.length-1].data.reverse();
       $scope.getEmails();
     });
   };
@@ -109,7 +109,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   $scope.addLabel = function (label) {
     return EmailsService.addLabel(label, $scope.storage.selectedArray, $scope.emails)
     .then(function (emails) {
-      $scope.emails = emails[emails.length-1].data;
+      $scope.emails = emails[emails.length-1].data.reverse();
       $scope.selectedLabel="Apply Label";
       $scope.getEmails();
     });
@@ -118,7 +118,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   $scope.removeLabel = function (label) {
     return EmailsService.removeLabel(label, $scope.storage.selectedArray, $scope.emails)
     .then(function (emails) {
-      $scope.emails = emails[emails.length-1].data;
+      $scope.emails = emails[emails.length-1].data.reverse();
       $scope.labelToRemove="Remove Label";
       $scope.getEmails();
     });
@@ -133,30 +133,36 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     var modalInstance = $modal.open({
       animation: $scope.animationsEnabled,
       templateUrl: './partials/compose-modal.html',
-      controller: function ($scope, $modalInstance, $http, EmailsService) {
+      controller: function ($scope, $modalInstance, $http, EmailsService, items) {
         $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
         };
         $scope.ok = function (subject) {
           return $http.post('http://localhost:3000/api/new', {subject: subject})
           .then(function (emails) {
-            console.log($scope.$parent);
-            $scope.$parent.emails = emails.data;
+            // console.log($scope);
+            // $scope.$parent.emails = emails.data;
             // $scope.$parent.getEmails();
-            $scope.cancel();
+            $modalInstance.close(emails);
+            console.log(emails);
+            return emails;
           });
         };
       },
       size: size,
       resolve: {
-        subject: function () {
-          return $scope.subject;
+        items: function () {
+          return emails;
         }
       }
     });
 
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
+    modalInstance.result.then(function (results) {
+      console.log(results);
+      console.log($scope);
+      // console.log(emails);
+      // console.log(items);
+      $scope.emails = results.data.reverse();
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });

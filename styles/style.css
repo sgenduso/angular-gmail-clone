@@ -84,7 +84,7 @@ html{
   display: inline-block;
 }
 
-.form-control{
+#query{
   border-radius: 0px;
   display: inline-block;
   width: 600px !important;
@@ -161,4 +161,9 @@ select{
   font-size: .8em;
   padding-left: 25px;
   padding-right: 25px;
+}
+
+#compose-input-box{
+  width: 100%;
+  border-radius: 0px;
 }

@@ -1,4 +1,4 @@
-<!-- <div ng-controller="ModalDemoCtrl"> -->
+<div ng-controller="InboxController">
     <!-- <script type="text/ng-template" id="myModalContent.html"> -->
         <div class="modal-header">
             <h3 class="modal-title">Compose New Message</h3>
@@ -6,13 +6,14 @@
         <div class="modal-body">
           Subject:
           <form ng-submit='composeMessage(subject)'>
-            <input type='text' ng-model='subject' class='form-control' autofocus>
+            <input type='text' ng-model='subject' class='form-control' id='compose-input-box' autofocus>
           </form>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="ok(subject)">Compose</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
         </div>
+      </div>
     <!-- </script> -->
 
     <!-- <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
