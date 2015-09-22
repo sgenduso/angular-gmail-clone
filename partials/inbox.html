@@ -1,6 +1,7 @@
 <div class='header-bar navbar navbar-fixed-top'>
   <img src='nGoogle_logo.png' alt='logo'/>
   <input type='text' class='form-control search' id='query' ng-model='query' />
+  <span id='query-icon'><i class='fa fa-search'></i></span>
 </div>
 <div class='button-bar'>
   <span>nGmail <i class='fa fa-caret-down'></i></span>
@@ -23,17 +24,6 @@
   <a class='btn btn-default btn-checkbox' ng-disabled='storage.noneSelected' ng-click='delete()'>
     <i class='fa fa-trash-o'></i>
   </a>
-  <div class='unread-count' ng-show='unreadCount > 0'>
-    <ng-pluralize count='unreadCount'
-                       when='{"1": "1 Unread Message",
-                              "other": "{} Unread Messages"}'>{{unreadCount}}</ng-pluralize>
-  </div>
-  <!-- <div id='newLabel' ng-show='addingLabel'>
-    Add a new Label:
-    <form ng-submit='addLabel(newLabel)'>
-      <input type='text' ng-model='newLabel' class='form-control'/>
-    </form>
-  </div> -->
 </div>
 <div class='sidebar'>
   <a class='btn btn-danger btn-checkbox' id='compose' ng-click='openComposeModal("sm", emails)'>COMPOSE</a>
@@ -44,7 +34,7 @@
 <div class='the-rest'>
   <div class='each-email' ng-repeat='email in (emails | filter : query | filter : fullInbox | filter : starredInbox | filter : unreadInbox) track by $index | orderBy : email._id'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">
     <div class='email-check'>
-    <input type='checkbox' ng-checked='storage.selectedArray[$index]' ng-click='selectOne($index, storage)'/>
+      <input type='checkbox' ng-checked='storage.selectedArray[$index]' ng-click='selectOne($index, storage)'/>
     </div>
     <i class='fa fa-star-o email-star' ng-show='email.starred === false' ng-click='toggleStarred(email)'></i>
     <i class='fa fa-star email-star' ng-show='email.starred === true' ng-click='toggleStarred(email)'></i>

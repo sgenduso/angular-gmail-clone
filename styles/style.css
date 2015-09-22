@@ -28,26 +28,10 @@ html{
   height: 40px;
   border-bottom: solid 1px #EFEFEF;
   position: relative;
-  /*display: flex;*/
-  /*flex-direction: column;
-  justify-content: center;*/
-  /*position: relative;
-  top: -50%;*/
-  /*vertical-align: middle;*/
 }
 
 .each-email div{
   margin-top: 10px;
-  /*border: 1px solid red;
-  margin-right: 100px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);*/
-}
-
-.each-email i{
-  /*top: 50%;
-  transform: translateY(-50%);*/
 }
 
 .email-check{
@@ -92,6 +76,22 @@ html{
   margin-left: 47px;
 }
 
+#query-icon{
+  background-color: #4889F4;
+  display: inline-block;
+  height: 34px;
+  width: 60px;
+  vertical-align: middle;
+  margin-bottom: 3px;
+}
+
+.fa-search{
+  color: white;
+  font-size: 1.3em;
+  margin-left: 20px;
+  margin-top: 7px;
+}
+
 .labels{
   display: inline-block;
   background-color: #EEC967;
@@ -105,14 +105,12 @@ html{
   height: 60px;
   background-color: #F4F4F4;
   border-bottom: solid 1px #EFEFEF;
-  /*margin: 0 !important;*/
   margin-bottom: 10px;
   padding: 0px !important;
 }
 
 .header-bar img{
   height: 50%;
-  /*margin-top: 17px;*/
   margin-left: 22px;
 }
 
@@ -125,10 +123,6 @@ html{
 select{
   border-radius: 2px;
   -webkit-border-radius: 2px;
-  /*-webkit-appearance: none;*/
-  /*border: 0;
-  outline: 1px inset LightGrey;
-  outline-offset:-1px;*/
 }
 
 .sidebar{
@@ -171,8 +165,4 @@ select{
 .modal-content{
   border-radius: 0px;
   margin-top: 30%;
-}
-
-.modal-header, .modal-footer{
-  /*background-color: #EFEFEF;*/
 }
