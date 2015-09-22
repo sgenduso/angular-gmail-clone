@@ -1,6 +1,6 @@
 app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', function ($http, $localStorage, $sessionStorage) {
   var getEmails = function () {
-    return $http.get('http://localhost:3000/api')
+    return $http.get('https://lit-falls-5507.herokuapp.com/api')
     .then(function (emails) {
       return emails.data;
     });
@@ -37,7 +37,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
 
   var toggleStarred = function (email) {
     email.starred = !email.starred;
-    return $http.post('http://localhost:3000/api/starred', email)
+    return $http.post('https://lit-falls-5507.herokuapp.com/api/starred', email)
     .then(function (emails) {
       return emails.data;
     });
@@ -48,7 +48,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
      selectedEmails.forEach(function (selected, i) {
       if (selected) {
         allEmails[i].read = true;
-         promises.push($http.post('http://localhost:3000/api/read', allEmails[i]));
+         promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/read', allEmails[i]));
       }
     });
     return Promise.all(promises);
@@ -62,7 +62,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
      selectedEmails.forEach(function (selected, i) {
       if (selected) {
         allEmails[i].read = false;
-        promises.push($http.post('http://localhost:3000/api/read', allEmails[i]));
+        promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/read', allEmails[i]));
       }
     });
     return Promise.all(promises);
@@ -85,7 +85,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     var promises = [];
      selectedEmails.forEach(function (selected, i) {
       if (selected) {
-        promises.push($http.post('http://localhost:3000/api/delete', allEmails[i]));
+        promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/delete', allEmails[i]));
       }
     });
     return Promise.all(promises);
@@ -108,7 +108,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
       if (selected && label !== 'Create New') {
         if (allEmails[i].filters.indexOf(label) < 0) {
           allEmails[i].filters.push(label);
-          promises.push($http.post('http://localhost:3000/api/filters', allEmails[i]));
+          promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/filters', allEmails[i]));
         }
       }
     });
@@ -121,7 +121,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
       if (selected) {
         if (allEmails[i].filters.indexOf(label) > -1) {
           allEmails[i].filters.splice(allEmails[i].filters.indexOf(label), 1);
-          promises.push($http.post('http://localhost:3000/api/filters', allEmails[i]));
+          promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/filters', allEmails[i]));
         }
       }
     });

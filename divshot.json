@@ -3,7 +3,9 @@
   "root": "./",
   "clean_urls": true,
   "error_page": "error.html",
+  "exclude": [".git/*"],
   "routes": {
     "**": "index.html"
   }
+
 }

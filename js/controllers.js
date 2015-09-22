@@ -141,7 +141,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
         $modalInstance.dismiss('cancel');
         };
         $scope.ok = function (subject) {
-          return $http.post('http://localhost:3000/api/new', {subject: subject})
+          return $http.post('https://lit-falls-5507.herokuapp.com/api/new', {subject: subject})
           .then(function (emails) {
             $modalInstance.close(emails);
             return emails;
@@ -158,6 +158,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
 
     modalInstance.result.then(function (results) {
       $scope.emails = results.data.reverse();
+      $scope.getEmails();
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });
@@ -178,7 +179,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
               if (selected) {
                 if (allEmails[i].filters.indexOf(label) < 0) {
                   allEmails[i].filters.push(label);
-                  promises.push($http.post('http://localhost:3000/api/filters', allEmails[i]));
+                  promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/filters', allEmails[i]));
                 }
               }
             });
