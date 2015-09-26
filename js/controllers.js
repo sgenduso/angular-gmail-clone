@@ -12,8 +12,8 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   $scope.storage.selectedArray = $scope.storage.selectedArray || $scope.emails.map(function (email) {
       return false;
   });
-  $scope.storage.allSelected = $scope.storage.allSelected === undefined ? false : $scope.storage.allSelected;
-  $scope.storage.noneSelected = $scope.storage.noneSelected === undefined ? true : $scope.storage.noneSelected;
+  $scope.storage.allSelected = $scope.storage.allSelected === undefined || $scope.emails.length === 0 ? false : $scope.storage.allSelected;
+  $scope.storage.noneSelected = $scope.storage.noneSelected === undefined || $scope.emails.length === 0 ? true : $scope.storage.noneSelected;
   $scope.storage.someSelected = $scope.storage.someSelected === undefined ? false : $scope.storage.someSelected;
   $scope.sidebarFilter = '';
     });
