@@ -6,9 +6,9 @@
 <div class='button-bar'>
   <span>nGmail <i class='fa fa-caret-down'></i></span>
   <a class='btn btn-default btn-checkbox'>
-    <i class='fa fa-square-o' ng-show='storage.noneSelected' ng-click='selectAll()'></i>
-    <i class='fa fa-check-square-o' ng-show='storage.allSelected' ng-click='deselectAll()'></i>
-    <i class='fa fa-minus-square-o' ng-show='storage.someSelected' ng-click='deselectAll()'></i>
+    <i class='fa fa-square-o' ng-show='storage.noneSelected' ng-click='selectedOrDeselected(true)'></i>
+    <i class='fa fa-check-square-o' ng-show='storage.allSelected' ng-click='selectedOrDeselected(false)'></i>
+    <i class='fa fa-minus-square-o' ng-show='storage.someSelected' ng-click='selectedOrDeselected(false)'></i>
   </a>
   <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='readOrUnread(true); checkUnread()'>Mark as Read</a>
   <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='readOrUnread(false); checkUnread()'>Mark as Unread</a>

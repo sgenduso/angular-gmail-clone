@@ -15,6 +15,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   $scope.storage.allSelected = $scope.storage.allSelected === undefined ? false : $scope.storage.allSelected;
   $scope.storage.noneSelected = $scope.storage.noneSelected === undefined ? true : $scope.storage.noneSelected;
   $scope.storage.someSelected = $scope.storage.someSelected === undefined ? false : $scope.storage.someSelected;
+  $scope.sidebarFilter = '';
     });
   };
 
@@ -24,31 +25,19 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     $scope.unreadCount = EmailsService.unreadCount($scope.emails);
   };
 
-    $scope.toggleThing = function (thing) {
+  $scope.toggleThing = function (thing) {
     thing = !thing;
   };
 
-  $scope.sidebarFilter = '';
 
   $scope.changeFilter = function (filter) {
     $scope.sidebarFilter = filter === 'starred' ? {starred: true} : filter === 'unread' ? {read: false} : '';
-    console.log($scope.sidebarFilter);
-    console.log($scope.sidebarFilter.starred === true);
   };
 
-
-  $scope.selectAll = function () {
-    $scope.storage.selectedArray = EmailsService.allSelectedArray($scope.emails);
-    $scope.storage.allSelected = true;
-    $scope.storage.noneSelected = false;
-    $scope.storage.someSelected = false;
-
-  };
-
-  $scope.deselectAll = function () {
-    $scope.storage.selectedArray = EmailsService.noneSelectedArray($scope.emails);
-    $scope.storage.allSelected = false;
-    $scope.storage.noneSelected = true;
+  $scope.selectedOrDeselected = function (selected) {
+    $scope.storage.selectedArray = EmailsService.selectedOrDeselected($scope.emails, selected);
+    $scope.storage.allSelected = selected;
+    $scope.storage.noneSelected = !selected;
     $scope.storage.someSelected = false;
   };
 

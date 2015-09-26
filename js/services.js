@@ -6,15 +6,9 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     });
   };
 
-  var allSelectedArray = function (messages) {
+  var selectedOrDeselected = function (messages, selected) {
     return messages.map(function (message) {
-      return true;
-    });
-  };
-
-  var noneSelectedArray = function (messages) {
-    return messages.map(function (message) {
-      return false;
+      return selected;
     });
   };
 
@@ -42,28 +36,6 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
       return emails.data;
     });
   };
-
-  // var markAsRead = function (selectedEmails, allEmails) {
-  //   var promises = [];
-  //    selectedEmails.forEach(function (selected, i) {
-  //     if (selected) {
-  //       allEmails[i].read = true;
-  //        promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/read', allEmails[i]));
-  //     }
-  //   });
-  //   return Promise.all(promises);
-  // };
-  //
-  // var markUnread = function (selectedEmails, allEmails) {
-  //   var promises = [];
-  //    selectedEmails.forEach(function (selected, i) {
-  //     if (selected) {
-  //       allEmails[i].read = false;
-  //       promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/read', allEmails[i]));
-  //     }
-  //   });
-  //   return Promise.all(promises);
-  // };
 
   var readOrUnread = function (selectedEmails, allEmails, markRead) {
     var promises = [];
@@ -144,13 +116,10 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
 
   return {
     getEmails: getEmails,
-    allSelectedArray: allSelectedArray,
-    noneSelectedArray: noneSelectedArray,
+    selectedOrDeselected: selectedOrDeselected,
     selectOne: selectOne,
     checkSelectedStatus: checkSelectedStatus,
     toggleStarred: toggleStarred,
-    // markAsRead: markAsRead,
-    // markUnread: markUnread,
     readOrUnread: readOrUnread,
     unreadCount: unreadCount,
     deleteEmails: deleteEmails,
