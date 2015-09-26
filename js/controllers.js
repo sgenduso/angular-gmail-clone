@@ -12,9 +12,9 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   $scope.storage.selectedArray = $scope.storage.selectedArray || $scope.emails.map(function (email) {
       return false;
   });
-  $scope.storage.allSelected = $scope.storage.allSelected || false;
-  $scope.storage.noneSelected = $scope.storage.noneSelected || false;
-  $scope.storage.someSelected = $scope.storage.someSelected || false;
+  $scope.storage.allSelected = $scope.storage.allSelected === undefined ? false : $scope.storage.allSelected;
+  $scope.storage.noneSelected = $scope.storage.noneSelected === undefined ? true : $scope.storage.noneSelected;
+  $scope.storage.someSelected = $scope.storage.someSelected === undefined ? false : $scope.storage.someSelected;
     });
   };
 
@@ -28,30 +28,12 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     thing = !thing;
   };
 
-  $scope.fullInbox = '';
-  $scope.starredInbox = '';
-  $scope.unreadInbox = '';
-  $scope.filterStatus = '';
+  $scope.sidebarFilter = '';
 
-  $scope.toggleFullInbox = function () {
-    $scope.fullInbox = '';
-    $scope.starredInbox = '';
-    $scope.unreadInbox = '';
-    $scope.filterStatus = '';
-  };
-
-  $scope.toggleStarredInbox = function () {
-    $scope.fullInbox = '';
-    $scope.starredInbox = {starred: true};
-    $scope.unreadInbox = '';
-    $scope.filterStatus = 'starred';
-  };
-
-  $scope.toggleUnreadInbox = function () {
-    $scope.fullInbox = '';
-    $scope.starredInbox = '';
-    $scope.unreadInbox = {read: false};
-    $scope.filterStatus = 'unread';
+  $scope.changeFilter = function (filter) {
+    $scope.sidebarFilter = filter === 'starred' ? {starred: true} : filter === 'unread' ? {read: false} : '';
+    console.log($scope.sidebarFilter);
+    console.log($scope.sidebarFilter.starred === true);
   };
 
 
@@ -148,7 +130,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
         $modalInstance.dismiss('cancel');
         };
         $scope.ok = function (subject) {
-          return $http.post('https://lit-falls-5507.herokuapp.com/api/new', {subject: subject})
+          return $http.post('http://lit-falls-5507.herokuapp.com/api/new' || 'https://lit-falls-5507.herokuapp.com/api/new', {subject: subject})
           .then(function (emails) {
             $modalInstance.close(emails);
             return emails;
@@ -186,7 +168,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
               if (selected) {
                 if (allEmails[i].filters.indexOf(label) < 0) {
                   allEmails[i].filters.push(label);
-                  promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/filters', allEmails[i]));
+                  promises.push($http.post('http://lit-falls-5507.herokuapp.com/api/filters' || 'https://lit-falls-5507.herokuapp.com/api/filters', allEmails[i]));
                 }
               }
             });
