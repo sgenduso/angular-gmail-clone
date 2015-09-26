@@ -43,32 +43,37 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     });
   };
 
-  var markAsRead = function (selectedEmails, allEmails) {
-    var promises = [];
-     selectedEmails.forEach(function (selected, i) {
-      if (selected) {
-        allEmails[i].read = true;
-         promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/read', allEmails[i]));
-      }
-    });
-    return Promise.all(promises);
-    // .then(function (emails) {
-    //   return emails[emails.length-1].data;
-    // });
-  };
+  // var markAsRead = function (selectedEmails, allEmails) {
+  //   var promises = [];
+  //    selectedEmails.forEach(function (selected, i) {
+  //     if (selected) {
+  //       allEmails[i].read = true;
+  //        promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/read', allEmails[i]));
+  //     }
+  //   });
+  //   return Promise.all(promises);
+  // };
+  //
+  // var markUnread = function (selectedEmails, allEmails) {
+  //   var promises = [];
+  //    selectedEmails.forEach(function (selected, i) {
+  //     if (selected) {
+  //       allEmails[i].read = false;
+  //       promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/read', allEmails[i]));
+  //     }
+  //   });
+  //   return Promise.all(promises);
+  // };
 
-  var markUnread = function (selectedEmails, allEmails) {
+  var readOrUnread = function (selectedEmails, allEmails, markRead) {
     var promises = [];
-     selectedEmails.forEach(function (selected, i) {
+    selectedEmails.forEach(function (selected, i) {
       if (selected) {
-        allEmails[i].read = false;
+        allEmails[i].read = markRead;
         promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/read', allEmails[i]));
       }
     });
     return Promise.all(promises);
-    // .then(function (emails) {
-    //   return emails[emails.length-1].data;
-    // });
   };
 
   var unreadCount = function (emails) {
@@ -89,9 +94,6 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
       }
     });
     return Promise.all(promises);
-    // .then(function (emails) {
-    //   return emails[emails.length-1].data;
-    // });
   };
 
 
@@ -147,8 +149,9 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     selectOne: selectOne,
     checkSelectedStatus: checkSelectedStatus,
     toggleStarred: toggleStarred,
-    markAsRead: markAsRead,
-    markUnread: markUnread,
+    // markAsRead: markAsRead,
+    // markUnread: markUnread,
+    readOrUnread: readOrUnread,
     unreadCount: unreadCount,
     deleteEmails: deleteEmails,
     showLabelInput: showLabelInput,

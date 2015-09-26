@@ -64,7 +64,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   };
 
   $scope.markAsRead = function () {
-   return EmailsService.markAsRead($scope.storage.selectedArray, $scope.emails)
+   return EmailsService.readOrUnread($scope.storage.selectedArray, $scope.emails, true)
     .then(function (emails) {
       $scope.emails = emails[emails.length-1].data.reverse();
       console.log($scope.emails);
@@ -74,7 +74,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   };
 
   $scope.markUnread = function () {
-    return EmailsService.markUnread($scope.storage.selectedArray, $scope.emails)
+    return EmailsService.readOrUnread($scope.storage.selectedArray, $scope.emails, false)
     .then(function (emails) {
       $scope.emails = emails[emails.length-1].data.reverse();
       console.log($scope.emails);
@@ -120,6 +120,8 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     $scope.labels = EmailsService.populateLabels($scope.emails);
   };
 
+
+//MODAL FOR COMPOSING A NEW MESSAGE
   $scope.openComposeModal = function (size, emails) {
 
     var modalInstance = $modal.open({
@@ -153,6 +155,8 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     });
   };
 
+
+//MODAL FOR ADDING A NEW LABEL TO ONE OR MORE MESSAGES
   $scope.openLabelModal = function (size, selectedEmails, allEmails) {
 
     var modalInstance = $modal.open({
