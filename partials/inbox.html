@@ -10,8 +10,8 @@
     <i class='fa fa-check-square-o' ng-show='storage.allSelected' ng-click='deselectAll()'></i>
     <i class='fa fa-minus-square-o' ng-show='storage.someSelected' ng-click='deselectAll()'></i>
   </a>
-  <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markAsRead(); checkUnread()'>Mark as Read</a>
-  <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='markUnread(); checkUnread()'>Mark as Unread</a>
+  <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='readOrUnread(true); checkUnread()'>Mark as Read</a>
+  <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='readOrUnread(false); checkUnread()'>Mark as Unread</a>
   <select class='btn btn-default select-dropdown' ng-model='selectedLabel' ng-init='selectedLabel="Apply Label"' ng-change='showLabelInput(selectedLabel); addLabel(selectedLabel)' ng-disabled='storage.noneSelected'>
     <option selected disabled value='Apply Label'>Apply Label</option>
     <option ng-repeat="label in labels" value="{{label}}">{{label}}</option>

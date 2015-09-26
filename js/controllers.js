@@ -63,18 +63,8 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     });
   };
 
-  $scope.markAsRead = function () {
-   return EmailsService.readOrUnread($scope.storage.selectedArray, $scope.emails, true)
-    .then(function (emails) {
-      $scope.emails = emails[emails.length-1].data.reverse();
-      console.log($scope.emails);
-      //checkUnread() only works if you click Mark as Read twice??
-      $scope.checkUnread();
-    });
-  };
-
-  $scope.markUnread = function () {
-    return EmailsService.readOrUnread($scope.storage.selectedArray, $scope.emails, false)
+  $scope.readOrUnread = function (markRead) {
+   return EmailsService.readOrUnread($scope.storage.selectedArray, $scope.emails, markRead)
     .then(function (emails) {
       $scope.emails = emails[emails.length-1].data.reverse();
       console.log($scope.emails);
