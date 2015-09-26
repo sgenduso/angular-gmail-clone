@@ -74,22 +74,14 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     if (selectedLabel === 'Create New') {
       return $scope.openLabelModal("sm", $scope.storage.selectedArray, $scope.emails);
     }
-    // $scope.addingLabel =  EmailsService.showLabelInput(selectedLabel);
   };
 
-  $scope.addLabel = function (label) {
-    return EmailsService.addLabel(label, $scope.storage.selectedArray, $scope.emails)
+
+  $scope.addOrRemoveLabel = function (label, addLabel) {
+    return EmailsService.addOrRemoveLabel(label, $scope.storage.selectedArray, $scope.emails, addLabel)
     .then(function (emails) {
       $scope.emails = emails[emails.length-1].data.reverse();
       $scope.selectedLabel="Apply Label";
-      $scope.getEmails();
-    });
-  };
-
-  $scope.removeLabel = function (label) {
-    return EmailsService.removeLabel(label, $scope.storage.selectedArray, $scope.emails)
-    .then(function (emails) {
-      $scope.emails = emails[emails.length-1].data.reverse();
       $scope.labelToRemove="Remove Label";
       $scope.getEmails();
     });

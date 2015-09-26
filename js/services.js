@@ -68,35 +68,26 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     return Promise.all(promises);
   };
 
-
-
   var showLabelInput = function (selectedLabel) {
     if (selectedLabel === 'Create New') {
       return true;
     }
   };
 
-  var addLabel = function (label, selectedEmails, allEmails) {
-    var promises = [];
-    selectedEmails.forEach(function (selected, i) {
-      if (selected && label !== 'Create New') {
-        if (allEmails[i].filters.indexOf(label) < 0) {
-          allEmails[i].filters.push(label);
-          promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/filters', allEmails[i]));
-        }
-      }
-    });
-    return Promise.all(promises);
-  };
-
-  var removeLabel = function (label, selectedEmails, allEmails) {
+  var addOrRemoveLabel = function (label, selectedEmails, allEmails, addLabel) {
     var promises = [];
     selectedEmails.forEach(function (selected, i) {
       if (selected) {
-        if (allEmails[i].filters.indexOf(label) > -1) {
-          allEmails[i].filters.splice(allEmails[i].filters.indexOf(label), 1);
-          promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/filters', allEmails[i]));
+        if (addLabel && label !== 'Create New') {
+          if (allEmails[i].filters.indexOf(label) < 0) {
+            allEmails[i].filters.push(label);
+          }
+        } else {
+          if (allEmails[i].filters.indexOf(label) > -1) {
+            allEmails[i].filters.splice(allEmails[i].filters.indexOf(label), 1);
+          }
         }
+        promises.push($http.post('https://lit-falls-5507.herokuapp.com/api/filters', allEmails[i]));
       }
     });
     return Promise.all(promises);
@@ -124,8 +115,7 @@ app.factory('EmailsService', ['$http', '$localStorage', '$sessionStorage', funct
     unreadCount: unreadCount,
     deleteEmails: deleteEmails,
     showLabelInput: showLabelInput,
-    addLabel: addLabel,
-    removeLabel: removeLabel,
+    addOrRemoveLabel: addOrRemoveLabel,
     populateLabels: populateLabels
   };
 }]);

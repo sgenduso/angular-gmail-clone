@@ -12,12 +12,12 @@
   </a>
   <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='readOrUnread(true); checkUnread()'>Mark as Read</a>
   <a class='btn btn-default' ng-disabled='storage.noneSelected' ng-click='readOrUnread(false); checkUnread()'>Mark as Unread</a>
-  <select class='btn btn-default select-dropdown' ng-model='selectedLabel' ng-init='selectedLabel="Apply Label"' ng-change='showLabelInput(selectedLabel); addLabel(selectedLabel)' ng-disabled='storage.noneSelected'>
+  <select class='btn btn-default select-dropdown' ng-model='selectedLabel' ng-init='selectedLabel="Apply Label"' ng-change='showLabelInput(selectedLabel); addOrRemoveLabel(selectedLabel, true)' ng-disabled='storage.noneSelected'>
     <option selected disabled value='Apply Label'>Apply Label</option>
     <option ng-repeat="label in labels" value="{{label}}">{{label}}</option>
     <option value='Create New'>Create New</option>
   </select>
-  <select class='btn btn-default select-dropdown' ng-model='labelToRemove' ng-init='labelToRemove="Remove Label"' ng-change='removeLabel(labelToRemove)' ng-disabled='storage.noneSelected'>
+  <select class='btn btn-default select-dropdown' ng-model='labelToRemove' ng-init='labelToRemove="Remove Label"' ng-change='addOrRemoveLabel(labelToRemove, false)' ng-disabled='storage.noneSelected'>
     <option selected disabled value='Remove Label'>Remove Label</option>
     <option ng-repeat="label in labels" value="{{label}}">{{label}}</option>
   </select>
