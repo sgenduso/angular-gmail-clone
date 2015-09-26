@@ -3,6 +3,7 @@
   <input type='text' class='form-control search' id='query' ng-model='query' />
   <span id='query-icon'><i class='fa fa-search'></i></span>
 </div>
+
 <div class='button-bar'>
   <span>nGmail <i class='fa fa-caret-down'></i></span>
   <a class='btn btn-default btn-checkbox'>
@@ -25,12 +26,14 @@
     <i class='fa fa-trash-o'></i>
   </a>
 </div>
+
 <div class='sidebar'>
   <a class='btn btn-danger btn-checkbox' id='compose' ng-click='openComposeModal("sm", emails)'>COMPOSE</a>
   <div ng-click='changeFilter("")' ng-class="{'red-text': sidebarFilter === ''}"> Inbox ({{unreadCount}}) </div>
   <div ng-click='changeFilter("starred")' ng-class="{'red-text': sidebarFilter.starred === true}"> Starred </div>
   <div ng-click='changeFilter("unread")' ng-class="{'red-text': sidebarFilter.read === false}"> Unread </div>
 </div>
+
 <div class='the-rest'>
   <div class='each-email' ng-repeat='email in (emails | filter : query | filter : sidebarFilter) track by $index | orderBy : email._id'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">
     <div class='email-check'>
