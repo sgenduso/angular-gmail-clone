@@ -35,7 +35,7 @@
 </div>
 
 <div class='the-rest'>
-  <div class='each-email' ng-repeat='email in (emails | filter : query | filter : sidebarFilter | orderBy : -"_id") track by $index'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">
+  <div class='each-email' ng-repeat='email in (emails | filter : query | filter : sidebarFilter) track by $index'  ng-class="{'selected': storage.selectedArray[$index], 'read': email.read, 'unread': !email.read}">
     <div class='email-check'>
       <input type='checkbox' ng-checked='storage.selectedArray[$index]' ng-click='selectOne($index, storage)'/>
     </div>
@@ -44,6 +44,6 @@
     <div ng-repeat='label in email.filters.sort()' class='labels'>
       {{label}}
     </div>
-    <div class='subject' ng-model='subject'> {{email._id}} {{email.subject}} </div>
+    <div class='subject' ng-model='subject'> {{email.subject}} </div>
   </div>
 </div>

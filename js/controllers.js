@@ -16,8 +16,6 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   $scope.storage.noneSelected = $scope.storage.noneSelected === undefined || $scope.emails.length === 0 ? true : $scope.storage.noneSelected;
   $scope.storage.someSelected = $scope.storage.someSelected === undefined ? false : $scope.storage.someSelected;
   $scope.sidebarFilter = '';
-    console.log($scope.storage.selectedArray);
-    console.log($scope.emails);
     });
   };
 
@@ -41,14 +39,10 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     $scope.storage.allSelected = selected;
     $scope.storage.noneSelected = !selected;
     $scope.storage.someSelected = false;
-    console.log($scope.storage.selectedArray);
-    console.log($scope.emails);
   };
 
   $scope.selectOne = function (index, storageObj) {
     EmailsService.selectOne(index, storageObj);
-    console.log($scope.storage.selectedArray);
-    console.log($scope.emails);
   };
 
   $scope.toggleStarred = function (email) {
@@ -62,7 +56,6 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
    return EmailsService.readOrUnread($scope.storage.selectedArray, $scope.emails, markRead)
     .then(function (emails) {
       $scope.emails = emails[emails.length-1].data.reverse();
-      console.log($scope.emails);
       //checkUnread() only works if you click Mark as Read twice??
       $scope.checkUnread();
     });
