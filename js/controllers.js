@@ -16,6 +16,8 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
   $scope.storage.noneSelected = $scope.storage.noneSelected === undefined || $scope.emails.length === 0 ? true : $scope.storage.noneSelected;
   $scope.storage.someSelected = $scope.storage.someSelected === undefined ? false : $scope.storage.someSelected;
   $scope.sidebarFilter = '';
+    console.log($scope.storage.selectedArray);
+    console.log($scope.emails);
     });
   };
 
@@ -39,10 +41,14 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     $scope.storage.allSelected = selected;
     $scope.storage.noneSelected = !selected;
     $scope.storage.someSelected = false;
+    console.log($scope.storage.selectedArray);
+    console.log($scope.emails);
   };
 
   $scope.selectOne = function (index, storageObj) {
     EmailsService.selectOne(index, storageObj);
+    console.log($scope.storage.selectedArray);
+    console.log($scope.emails);
   };
 
   $scope.toggleStarred = function (email) {
@@ -67,6 +73,7 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     .then(function (emails) {
       $scope.emails = emails[emails.length-1].data.reverse();
       $scope.getEmails();
+      $scope.selectedOrDeselected(false);
     });
   };
 
@@ -119,8 +126,10 @@ app.controller('InboxController', ['$scope', 'EmailsService', '$localStorage', '
     });
 
     modalInstance.result.then(function (results) {
+      $scope.storage.selectedArray.unshift(false);
       $scope.emails = results.data.reverse();
       $scope.getEmails();
+      return EmailsService.checkSelectedStatus($scope.storage);
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });
